@@ -8,7 +8,6 @@ function App() {
   return (
     <Router>
         <Routes>
-          <Route path="/" element={<QuizSelect/>} exact />
           <Route path="/:topic/random" element={<RandomQuestionsQuiz/>} exact />
         </Routes>
     </Router>
