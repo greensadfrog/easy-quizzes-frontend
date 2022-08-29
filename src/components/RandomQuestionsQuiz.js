@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import {useParams} from "react-router-dom";
 import ConnectApi from "../api/ConnectApi";
-import Header from "./framework/Header";
+// import Header from "./framework/Header";
 
 
 export const RandomQuestionsQuiz = () => {
