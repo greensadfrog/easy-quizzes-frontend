@@ -7,9 +7,7 @@ import ConnectApi from "../api/ConnectApi";
 
 export const RandomQuestionsQuiz = () => {
     const {topic} = useParams();
-    const API_HOST = process.env.API_HOST || 'http://127.0.0.1:8000/'
-    console.log(API_HOST)
-    console.log(process.env.HOST_NAME)
+    const API_HOST = 'https://easy-quizzes-api.herokuapp.com/'
     const API_URL = `${API_HOST}quiz/${topic}/random/`;
     const [dataState] = ConnectApi(API_URL);
     const questionText = dataState.data.flatMap((question) => question.question_text);
