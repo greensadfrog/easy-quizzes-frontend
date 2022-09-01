@@ -9,6 +9,7 @@ export const RandomQuestionsQuiz = () => {
     const {topic} = useParams();
     const HOST_NAME = process.env.HOST_NAME || 'http://127.0.0.1:8000/'
     console.log(HOST_NAME)
+    console.log(process.env.HOST_NAME)
     const API_URL = `${HOST_NAME}quiz/${topic}/random/`;
     const [dataState] = ConnectApi(API_URL);
     const questionText = dataState.data.flatMap((question) => question.question_text);
