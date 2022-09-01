@@ -1,39 +1,17 @@
 import React, {useState} from "react";
-import styled from "styled-components";
 
 import {useParams} from "react-router-dom";
 import ConnectApi from "../api/ConnectApi";
-// import Header from "./framework/Header";
+
 
 
 export const RandomQuestionsQuiz = () => {
     const {topic} = useParams();
-    const API_URL = `https://easy-quizzes-api.herokuapp.com/quiz/${topic}/random/`;
+    const HOST = process.env.HOST || 'http://127.0.0.1:8000/'
+    const API_URL = `${HOST}quiz/${topic}/random/`;
     const [dataState] = ConnectApi(API_URL);
     const questionText = dataState.data.flatMap((question) => question.question_text);
     const answersArray = dataState.data.flatMap((question) => question.answer);
-
-    // const theme = {
-    //     standart: {
-    //         default: '#f5f5f5'
-    //     },
-    //     correct: {
-    //         default: '#b2ff59'
-    //     }
-    // }
-    // const Button = styled.button`
-    //   background-color: ${props => theme[props.theme].default};
-    //   padding: 5px 15px;
-    //   margin: 10px;
-    //   outline: 0;
-    //   cursor: pointer;
-    //   border-radius: 5px;
-    //   box-shadow: 0 1px 5px lightgray;
-    // `;
-
-    // Button.defaultProps = {
-    //     theme: "standart"
-    // };
 
     const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
     const [incorrectMessage, setIncorrectMessage] = useState('')
@@ -50,6 +28,19 @@ export const RandomQuestionsQuiz = () => {
         window.location.reload(false);
     }
 
+    // https://stackoverflow.com/a/2450976
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
 
     return (
         <React.Fragment>
@@ -61,7 +52,7 @@ export const RandomQuestionsQuiz = () => {
                     </div>
                 </div>
                 <div className="answer_section">
-                    {answersArray.map(item => (
+                    {shuffle(answersArray).map(item => (
 
                         <button
 
