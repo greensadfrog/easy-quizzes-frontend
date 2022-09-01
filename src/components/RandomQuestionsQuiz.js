@@ -7,8 +7,8 @@ import ConnectApi from "../api/ConnectApi";
 
 export const RandomQuestionsQuiz = () => {
     const {topic} = useParams();
-    const HOST = process.env.HOST || 'http://127.0.0.1:8000/'
-    const API_URL = `${HOST}quiz/${topic}/random/`;
+    const HOST_NAME = process.env.HOST_NAME || 'http://127.0.0.1:8000/'
+    const API_URL = `${HOST_NAME}quiz/${topic}/random/`;
     const [dataState] = ConnectApi(API_URL);
     const questionText = dataState.data.flatMap((question) => question.question_text);
     const answersArray = dataState.data.flatMap((question) => question.answer);
